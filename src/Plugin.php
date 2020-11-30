@@ -40,7 +40,7 @@ class Plugin extends \craft\base\Plugin
             $variable->set('contactFormRecaptcha', ReCaptchaVariable::class);
         });
 
-        // Subscribe to before send to add spam validation
+        // Subscribe to after validate to add extra validation
         Event::on(Submission::class, Submission::EVENT_AFTER_VALIDATE, function (Event $e) {
             /** @var Submission $submission */
             $submission = $e->sender;
