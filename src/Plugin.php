@@ -48,7 +48,7 @@ class Plugin extends \craft\base\Plugin
             $captchaResponse = Craft::$app->request->getParam('g-recaptcha-response');
 
             if (!$captchaResponse) {
-                $submission->addError('recaptcha', 'The Recaptcha response is missing.');
+                $submission->addError('recaptcha', 'The reCAPTCHA response is missing.');
 
                 return;
             }
@@ -56,7 +56,7 @@ class Plugin extends \craft\base\Plugin
             $verificationResult = $this->recaptcha->verify($captchaResponse, $_SERVER['REMOTE_ADDR']);
 
             if (!$verificationResult->isSuccess()) {
-                $submission->addError('recaptcha', 'The Recaptcha verification failed.');
+                $submission->addError('recaptcha', 'The reCAPTCHA verification failed.');
 
                 return;
             }
