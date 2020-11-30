@@ -1,0 +1,21 @@
+{
+    "name": "recranet/craft-contact-form-recaptcha",
+    "description": "Adds reCAPTCHA validation to Contact Forms",
+    "version": "1.0.0",
+    "type": "craft-plugin",
+    "license": "proprietary",
+    "require": {
+        "craftcms/cms": "^3.1.0",
+        "craftcms/contact-form": "^2.2",
+        "google/recaptcha": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "recranet\\contactformrecaptcha\\": "src/"
+        }
+    },
+    "extra": {
+        "handle": "contact-form-recaptcha",
+        "name": "Contact Form reCAPTCHA"
+    }
+}
