@@ -9,6 +9,7 @@ use ReCaptcha\ReCaptcha;
 use recranet\contactformrecaptcha\models\Settings;
 use recranet\contactformrecaptcha\variables\ReCaptchaVariable;
 use yii\base\Event;
+use yii\base\ModelEvent;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -40,8 +41,8 @@ class Plugin extends \craft\base\Plugin
             $variable->set('contactFormRecaptcha', ReCaptchaVariable::class);
         });
 
-        // Subscribe to after validate to add extra validation
-        Event::on(Submission::class, Submission::EVENT_AFTER_VALIDATE, function (Event $e) {
+        // Subscribe to before validate to add extra validation
+        Event::on(Submission::class, Submission::EVENT_BEFORE_VALIDATE, function (ModelEvent $e) {
             /** @var Submission $submission */
             $submission = $e->sender;
 
