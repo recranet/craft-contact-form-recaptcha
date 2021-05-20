@@ -5,6 +5,10 @@
 
 # COMPOSER
 /vendor
+composer.lock
+
+# NPM
+package-lock.json
 
 # BUILD FILES
 /bower_components/*
