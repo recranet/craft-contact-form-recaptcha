@@ -23,19 +23,36 @@ class ReCaptchaVariable
     window.addEventListener('load', function() {
         var form = document.getElementById('$formId');
         
-        var widgetId = grecaptcha.render('$recaptchaId', {
-            'sitekey': '$siteKey',
-            'callback': function() {
-                form.submit();
-            },
-            'size': 'invisible',
-            'badge': 'inline'
+        if (typeof recaptchaCallbacks == 'undefined') {
+            window.recaptchaCallbacks = [];
+        }
+
+        recaptchaCallbacks.push(function() {
+            var widgetId = grecaptcha.render('$recaptchaId', {
+                'sitekey': '$siteKey',
+                'callback': function() {
+                    form.submit();
+                },
+                'size': 'invisible',
+                'badge': 'inline'
+            });
+
+            form.setAttribute('data-g-recaptcha-id', widgetId);
         });
 
-        form.setAttribute('data-g-recaptcha-id', widgetId);
+        form.addEventListener('change', function(e) {
+            initRecaptcha();
+        });
         
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            if (typeof grecaptcha == 'undefined') {
+                initRecaptcha();
+
+                alert('reCAPTCHA is not loaded yet, try resubmitting the form');                
+                return;
+            }
             
             grecaptcha.execute(form.getAttribute('data-g-recaptcha-id'));
         });
@@ -63,11 +80,15 @@ EOF;
     window.addEventListener('load', function() {
         var form = document.getElementById('$formId');
 
-        form.addEventListener('change', function(e) {
-            if (form.getAttribute('data-g-recaptcha-id')) {
-                return;
-            }
+        if (form.getAttribute('data-g-recaptcha-id')) {
+            return;
+        }
 
+        if (typeof recaptchaCallbacks == 'undefined') {
+            window.recaptchaCallbacks = [];
+        }
+
+        recaptchaCallbacks.push(function() {
             var widgetId = grecaptcha.render('$recaptchaId', {
                 'sitekey': '$siteKey',
                 'callback': '$callback',
@@ -77,9 +98,20 @@ EOF;
     
             form.setAttribute('data-g-recaptcha-id', widgetId);
         });
+
+        form.addEventListener('change', function(e) {
+            initRecaptcha();
+        });
         
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            if (typeof grecaptcha == 'undefined') {
+                initRecaptcha();
+
+                alert('reCAPTCHA is not loaded yet, try resubmitting the form');
+                return;
+            }
             
             grecaptcha.execute(form.getAttribute('data-g-recaptcha-id'));
         });

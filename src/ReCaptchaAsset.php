@@ -8,8 +8,10 @@ class ReCaptchaAsset extends AssetBundle
 {
     public function init()
     {
+        $this->sourcePath = '@recranet/contactformrecaptcha/resources';
+
         $this->js = [
-            'https://www.google.com/recaptcha/api.js?render=explicit',
+            'js/contact-form-recaptcha.min.js',
         ];
 
         $this->jsOptions = [
