@@ -9,17 +9,17 @@ class Settings extends Model
     /**
      * @var string|null
      */
-    public $siteKey;
+    public ?string $siteKey = null;
 
     /**
      * @var string|null
      */
-    public $secretKey;
+    public ?string $secretKey = null;
 
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['siteKey', 'secretKey'], 'required'],

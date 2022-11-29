@@ -13,10 +13,7 @@ use yii\base\ModelEvent;
 
 class Plugin extends \craft\base\Plugin
 {
-    /**
-     * @var \ReCaptcha\ReCaptcha
-     */
-    private $recaptcha;
+    private ?ReCaptcha $recaptcha = null;
 
     public function init()
     {
@@ -26,6 +23,7 @@ class Plugin extends \craft\base\Plugin
             return;
         }
 
+        /** @var Settings $settings */
         $settings = $this->getSettings();
 
         if (!$settings->siteKey || !$settings->secretKey) {
@@ -64,7 +62,7 @@ class Plugin extends \craft\base\Plugin
         });
     }
 
-    protected function createSettingsModel()
+    protected function createSettingsModel(): Settings
     {
         return new Settings();
     }
