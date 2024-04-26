@@ -17,6 +17,11 @@ class Settings extends Model
     public ?string $secretKey = null;
 
     /**
+     * @var float|null
+     */
+    public ?float $recaptchaThreshold = 0.5;
+
+    /**
      * @inheritdoc
      */
     public function rules(): array

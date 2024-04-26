@@ -31,6 +31,7 @@ class Plugin extends \craft\base\Plugin
         }
 
         $this->recaptcha = new ReCaptcha($settings->secretKey);
+        $this->recaptcha->setScoreThreshold($settings->recaptchaThreshold);
 
         // Add reCAPTCHA template variable
         Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function (Event $e) {
