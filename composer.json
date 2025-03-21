@@ -4,16 +4,30 @@
     "version": "4.0.1",
     "type": "craft-plugin",
     "license": "proprietary",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=7.4",
         "craftcms/cms": "^4.0",
         "craftcms/contact-form": "^3.0",
         "google/recaptcha": "^1.2"
     },
+    "require-dev": {
+        "craftcms/phpstan": "dev-main"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
+    },
     "autoload": {
         "psr-4": {
             "recranet\\contactformrecaptcha\\": "src/"
         }
+    },
+    "scripts": {
+        "phpstan": "phpstan --memory-limit=1G"
     },
     "extra": {
         "handle": "contact-form-recaptcha",
