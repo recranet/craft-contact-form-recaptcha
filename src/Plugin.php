@@ -49,6 +49,7 @@ class Plugin extends \craft\base\Plugin
 
             if (!$captchaResponse) {
                 $submission->addError('recaptcha', 'The reCAPTCHA response is missing.');
+                \Craft::error('The reCAPTCHA response is missing.', 'contact-form-recaptcha');
 
                 return;
             }
@@ -57,6 +58,7 @@ class Plugin extends \craft\base\Plugin
 
             if (!$verificationResult->isSuccess()) {
                 $submission->addError('recaptcha', 'The reCAPTCHA verification failed.');
+                \Craft::error('The reCAPTCHA verification failed.', 'contact-form-recaptcha');
 
                 return;
             }
